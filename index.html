@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar Mohamed - Flutter Developer Portfolio</title>
+    <meta name="description" content="Omar Mohamed - Passionate Flutter Developer building seamless mobile experiences with Flutter & Dart">
+    <meta name="keywords" content="Omar Mohamed, Flutter Developer, Mobile App Development, Dart, Firebase">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+        
+        .neon-text {
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+        
+        .purple-glow {
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.3);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(6, 182, 212, 0.6);
+            border-radius: 50%;
+            animation: particle-float 6s infinite linear;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        .skill-bar {
+            width: 0%;
+            transition: width 2s ease-in-out;
+        }
+        
+        .project-card {
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: #06b6d4;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold neon-text">Omar Mohamed</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-cyan-400 transition-colors">Home</a>
+                    <a href="#about" class="hover:text-cyan-400 transition-colors">About</a>
+                    <a href="#education" class="hover:text-cyan-400 transition-colors">Education</a>
+                    <a href="#skills" class="hover:text-cyan-400 transition-colors">Skills</a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-colors">Projects</a>
+                    <a href="#experience" class="hover:text-cyan-400 transition-colors">Experience</a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-colors">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 bg-gray-900/95 backdrop-blur-md hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl">
+            <a href="#home" class="hover:text-cyan-400 transition-colors mobile-menu-link">Home</a>
+            <a href="#about" class="hover:text-cyan-400 transition-colors mobile-menu-link">About</a>
+            <a href="#education" class="hover:text-cyan-400 transition-colors mobile-menu-link">Education</a>
+            <a href="#skills" class="hover:text-cyan-400 transition-colors mobile-menu-link">Skills</a>
+            <a href="#projects" class="hover:text-cyan-400 transition-colors mobile-menu-link">Projects</a>
+            <a href="#experience" class="hover:text-cyan-400 transition-colors mobile-menu-link">Experience</a>
+            <a href="#contact" class="hover:text-cyan-400 transition-colors mobile-menu-link">Contact</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen gradient-bg relative flex items-center justify-center">
+        <div class="particles"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="fade-in">
+                <div class="w-48 h-48 mx-auto mb-8 rounded-full bg-gradient-to-r from-cyan-400 to-purple-500 p-1 floating">
+                    <img src="./profile_img.jpg" 
+                         alt="Omar Mohamed" class="w-full h-full rounded-full object-cover">
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-4 neon-text">Omar Mohamed</h1>
+                <h2 class="text-2xl md:text-3xl text-purple-400 mb-6">Flutter Developer</h2>
+                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                    Building seamless mobile experiences with Flutter & Dart
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="#projects" class="bg-cyan-500 hover:bg-cyan-600 px-8 py-4 rounded-full font-semibold transition-all neon-glow hover:scale-105">
+                        View My Work
+                    </a>
+                    <a href="#" class="border-2 border-purple-500 hover:bg-purple-500 px-8 py-4 rounded-full font-semibold transition-all purple-glow hover:scale-105">
+                        Download CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text fade-in">About Me</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12 fade-in">
+                    <p class="text-xl md:text-2xl text-gray-300 leading-relaxed">
+                        I am a passionate Flutter Developer with experience in mobile applications, 
+                        team collaboration, and delivering high-quality projects.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-900 p-6 rounded-lg neon-glow fade-in">
+                        <i class="fab fa-flutter text-4xl text-cyan-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Flutter</h3>
+                        <p class="text-gray-400">Cross-platform mobile development</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg purple-glow fade-in">
+                        <i class="fas fa-code text-4xl text-purple-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Dart</h3>
+                        <p class="text-gray-400">Modern programming language</p>
+                    </div>
+                    <div class="bg-gray-900 p-6 rounded-lg neon-glow fade-in">
+                        <i class="fas fa-fire text-4xl text-orange-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold mb-2">Firebase</h3>
+                        <p class="text-gray-400">Backend as a Service</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text fade-in">Education</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="relative border-l-2 border-cyan-400 pl-8 ml-4">
+                    <div class="timeline-item fade-in">
+                        <div class="bg-gray-800 p-6 rounded-lg neon-glow">
+                            <h3 class="text-2xl font-bold text-cyan-400 mb-2">BSc in Computer Science</h3>
+                            <p class="text-purple-400 text-lg mb-2">Zagazig University</p>
+                            <p class="text-gray-400 mb-2">Expected Graduation: 2026</p>
+                            <p class="text-green-400 font-semibold">Last Year Grade: Excellent</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text fade-in">Skills</h2>
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-3 gap-12">
+                    <!-- Languages & Frameworks -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-bold text-cyan-400 mb-6">Languages & Frameworks</h3>
+                        <div class="space-y-4">
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>Flutter</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-cyan-400 h-2 rounded-full" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>Dart</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-purple-400 h-2 rounded-full" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>Firebase</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-orange-400 h-2 rounded-full" data-width="80"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-6">Tools</h3>
+                        <div class="space-y-4">
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>Git/GitHub</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-green-400 h-2 rounded-full" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>VS Code</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-blue-400 h-2 rounded-full" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>Android Studio</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-yellow-400 h-2 rounded-full" data-width="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other -->
+                    <div class="fade-in">
+                        <h3 class="text-2xl font-bold text-green-400 mb-6">Other</h3>
+                        <div class="space-y-4">
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>State Management</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-pink-400 h-2 rounded-full" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>UI/UX Implementation</span>
+                                    <span>90%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-indigo-400 h-2 rounded-full" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-2">
+                                    <span>REST APIs</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="bg-gray-700 rounded-full h-2">
+                                    <div class="skill-bar bg-red-400 h-2 rounded-full" data-width="75"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text fade-in">Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                <!-- Project Cards -->
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden neon-glow fade-in">
+                    <img src="./fastook_logo.png" alt="Fastook App" class="w-full h-48 object-contain">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-cyan-400 mb-2">Fastook</h3>
+                        <p class="text-gray-400 mb-4">E-commerce mobile application with modern UI and seamless shopping experience</p>
+                        <a href="https://github.com/Omar20041223/gdg_camp_final_project" class="inline-flex items-center text-purple-400 hover:text-purple-300">
+                            <i class="fab fa-github mr-2"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden purple-glow fade-in">
+                    <img src="./touf_w_shouf_logo.png" alt="Toufwshouf App" class="w-full h-48 object-contain">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-purple-400 mb-2">Toufwshouf</h3>
+                        <p class="text-gray-400 mb-4">Tourist guide application helping users discover amazing destinations</p>
+                        <a href="https://github.com/omar-949/touf_w/tree/toufwshouf" class="inline-flex items-center text-cyan-400 hover:text-cyan-300">
+                            <i class="fab fa-github mr-2"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden neon-glow fade-in">
+                    <img src="./bookly_logo.png" alt="Bookly App" class="w-full h-48 object-contain">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-green-400 mb-2">Bookly</h3>
+                        <p class="text-gray-400 mb-4">Books application for reading enthusiasts with clean interface</p>
+                        <a href="https://github.com/Omar20041223/bookly" class="inline-flex items-center text-purple-400 hover:text-purple-300">
+                            <i class="fab fa-github mr-2"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden purple-glow fade-in">
+                    <img src="./shaghag_logo.jpg" alt="Shaghaf App" class="w-full h-48 object-contain">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-orange-400 mb-2">Shaghaf</h3>
+                        <p class="text-gray-400 mb-4">Working space booking application for remote workers</p>
+                        <a href="https://github.com/AhmedYasserww/shaghaf_app/tree/OmarMohmamed" class="inline-flex items-center text-cyan-400 hover:text-cyan-300">
+                            <i class="fab fa-github mr-2"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden neon-glow fade-in">
+                    <img src="/placeholder.svg?height=200&width=400" alt="GDG Camp Project" class="w-full h-48 object-contain">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-blue-400 mb-2">GDG Camp Final Project</h3>
+                        <p class="text-gray-400 mb-4">Final project developed during Google Developer Groups camp</p>
+                        <a href="https://github.com/Omar20041223" class="inline-flex items-center text-purple-400 hover:text-purple-300">
+                            <i class="fab fa-github mr-2"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card bg-gray-800 rounded-lg overflow-hidden purple-glow fade-in">
+                    <img src="./todo_logo.png" alt="Todo App" class="w-full h-48 object-contain">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-pink-400 mb-2">Todo App</h3>
+                        <p class="text-gray-400 mb-4">Task management application with intuitive design</p>
+                        <a href="https://github.com/Omar20041223/todo_app" class="inline-flex items-center text-cyan-400 hover:text-cyan-300">
+                            <i class="fab fa-github mr-2"></i>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text fade-in">Experience & Team Projects</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gray-900 p-8 rounded-lg neon-glow fade-in">
+                        <h3 class="text-2xl font-bold text-cyan-400 mb-4">Shaghaf App</h3>
+                        <p class="text-gray-400 mb-4">Collaborated with a team to develop a working space booking application</p>
+                        <ul class="text-gray-300 space-y-2">
+                            <li>• Team collaboration and project management</li>
+                            <li>• UI/UX implementation</li>
+                            <li>• State management integration</li>
+                            <li>• API integration and testing</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-lg purple-glow fade-in">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-4">Toufwshouf Tourist Project</h3>
+                        <p class="text-gray-400 mb-4">Team project focused on creating a comprehensive tourist guide</p>
+                        <ul class="text-gray-300 space-y-2">
+                            <li>• Cross-functional team collaboration</li>
+                            <li>• Feature development and testing</li>
+                            <li>• Code review and quality assurance</li>
+                            <li>• User experience optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 neon-text fade-in">Get In Touch</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact Form -->
+                    <div class="fade-in">
+                        <form class="space-y-6">
+                            <div>
+                                <input type="text" placeholder="Your Name" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:border-cyan-400 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <input type="email" placeholder="Your Email" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:border-cyan-400 focus:outline-none transition-colors">
+                            </div>
+                            <div>
+                                <textarea rows="5" placeholder="Your Message" class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 focus:border-cyan-400 focus:outline-none transition-colors resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-600 py-3 rounded-lg font-semibold transition-all neon-glow hover:scale-105">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="fade-in">
+                        <div class="space-y-8">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center neon-glow">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold">Email</h3>
+                                    <p class="text-gray-400">omarmohamed01284@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center purple-glow">
+                                    <i class="fab fa-linkedin text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold">LinkedIn</h3>
+                                    <a href="https://linkedin.com/in/omar-mohamed-flutter" class="text-gray-400 hover:text-cyan-400 transition-colors">linkedin.com/in/omar-mohamed-flutter</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center neon-glow">
+                                    <i class="fab fa-github text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold">GitHub</h3>
+                                    <a href="https://github.com/Omar20041223" class="text-gray-400 hover:text-cyan-400 transition-colors">github.com/Omar20041223</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Icons -->
+                        <div class="flex space-x-6 mt-12">
+                            <a href="https://linkedin.com/in/omar-mohamed-flutter" class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform purple-glow">
+                                <i class="fab fa-linkedin text-white"></i>
+                            </a>
+                            <a href="https://github.com/Omar20041223" class="w-12 h-12 bg-gray-700 rounded-full flex items-center justify-center hover:scale-110 transition-transform neon-glow">
+                                <i class="fab fa-github text-white"></i>
+                            </a>
+                            <a href="mailto:omarmohamed01284@gmail.com" class="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform neon-glow">
+                                <i class="fas fa-envelope text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-gray-400 fade-in">
+                © 2024 Omar Mohamed. Built with ❤️ using Flutter & Web Tech
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animate elements on scroll
+        gsap.utils.toArray('.fade-in').forEach((element) => {
+            gsap.fromTo(element, 
+                { opacity: 0, y: 30 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: element,
+                        start: 'top 80%',
+                        end: 'bottom 20%',
+                        toggleActions: 'play none none reverse'
+                    }
+                }
+            );
+        });
+
+        // Animate skill bars
+        gsap.utils.toArray('.skill-bar').forEach((bar) => {
+            const width = bar.getAttribute('data-width');
+            gsap.to(bar, {
+                width: width + '%',
+                duration: 2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: bar,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Initialize particles
+        createParticles();
+
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Add hover effects to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                gsap.to(this, { scale: 1.05, duration: 0.3 });
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                gsap.to(this, { scale: 1, duration: 0.3 });
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-gray-900');
+                nav.classList.remove('bg-gray-900/80');
+            } else {
+                nav.classList.remove('bg-gray-900');
+                nav.classList.add('bg-gray-900/80');
+            }
+        });
+    </script>
+</body>
+</html>
